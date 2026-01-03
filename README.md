@@ -5,6 +5,12 @@ A Ruby MCP (Model Context Protocol) server for browser automation using [Ferrum]
 ## Installation
 
 ```bash
+gem install crucible
+```
+
+Or from source:
+
+```bash
 git clone https://github.com/joshfng/crucible.git
 cd crucible
 bundle install
@@ -50,18 +56,18 @@ bundle install
 
 ### Claude Code Integration
 
+```bash
+gem install crucible
+```
+
 Add to your Claude Code MCP settings (`~/.claude/settings.json`):
 
 ```json
 {
   "mcpServers": {
     "crucible": {
-      "command": "ruby",
-      "args": [
-        "-I",
-        "/path/to/crucible/lib",
-        "/path/to/crucible/exe/crucible"
-      ]
+      "command": "crucible",
+      "args": ["--config", "~/.config/crucible/config.yml"]
     }
   }
 }
