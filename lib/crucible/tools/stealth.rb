@@ -52,12 +52,10 @@ module Crucible
             sessions.enable_stealth(session, profile: profile_sym)
 
             info = sessions.stealth_info(session)
-            MCP::Tool::Response.new([{
-              type: 'text',
-              text: "Stealth mode enabled for session '#{session}' with profile: #{info[:profile]}"
-            }])
+            msg = "Stealth mode enabled for session '#{session}' with profile: #{info[:profile]}"
+            MCP::Tool::Response.new([{ type: 'text', text: msg }])
           rescue Crucible::SessionNotFoundError, Crucible::Error => e
-            MCP::Tool::Response.new([{ type: 'text', text: e.message }], is_error: true)
+            MCP::Tool::Response.new([{ type: 'text', text: e.message }], error: true)
           end
         end
 
@@ -82,11 +80,11 @@ module Crucible
             sessions.disable_stealth(session)
 
             MCP::Tool::Response.new([{
-              type: 'text',
-              text: "Stealth mode disabled for session '#{session}'"
-            }])
+                                      type: 'text',
+                                      text: "Stealth mode disabled for session '#{session}'"
+                                    }])
           rescue Crucible::SessionNotFoundError => e
-            MCP::Tool::Response.new([{ type: 'text', text: e.message }], is_error: true)
+            MCP::Tool::Response.new([{ type: 'text', text: e.message }], error: true)
           end
         end
 
@@ -116,11 +114,11 @@ module Crucible
             }
 
             MCP::Tool::Response.new([{
-              type: 'text',
-              text: JSON.pretty_generate(status)
-            }])
+                                      type: 'text',
+                                      text: JSON.pretty_generate(status)
+                                    }])
           rescue Crucible::SessionNotFoundError => e
-            MCP::Tool::Response.new([{ type: 'text', text: e.message }], is_error: true)
+            MCP::Tool::Response.new([{ type: 'text', text: e.message }], error: true)
           end
         end
 
@@ -154,11 +152,11 @@ module Crucible
             sessions.enable_stealth(session, profile: profile.to_sym)
 
             MCP::Tool::Response.new([{
-              type: 'text',
-              text: "Stealth profile set to '#{profile}' for session '#{session}'"
-            }])
+                                      type: 'text',
+                                      text: "Stealth profile set to '#{profile}' for session '#{session}'"
+                                    }])
           rescue Crucible::SessionNotFoundError, Crucible::Error => e
-            MCP::Tool::Response.new([{ type: 'text', text: e.message }], is_error: true)
+            MCP::Tool::Response.new([{ type: 'text', text: e.message }], error: true)
           end
         end
       end
