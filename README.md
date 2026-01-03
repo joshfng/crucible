@@ -140,11 +140,11 @@ Add to your Claude Code MCP settings (`~/.claude/settings.json`):
 | `get_stealth_status`  | Get stealth mode status for a session                 |
 | `set_stealth_profile` | Change the stealth profile (minimal/moderate/maximum) |
 
-## Sessions
+## Session Management
 
 All tools accept an optional `session` parameter to manage multiple independent browser instances:
 
-```
+```ruby
 # These run in separate browsers
 navigate(session: "login-flow", url: "https://example.com/login")
 navigate(session: "signup-flow", url: "https://example.com/signup")
@@ -166,7 +166,7 @@ Sessions are created automatically on first use and persist until explicitly clo
 
 ### Basic Navigation
 
-```
+```ruby
 navigate(url: "https://example.com")
 wait_for(selector: ".content")
 get_content(format: "text")
@@ -174,7 +174,7 @@ get_content(format: "text")
 
 ### Form Submission
 
-```
+```ruby
 navigate(url: "https://example.com/login")
 type(selector: "#email", text: "user@example.com")
 type(selector: "#password", text: "secret123")
@@ -184,7 +184,7 @@ wait_for(selector: ".dashboard")
 
 ### Screenshots & PDFs
 
-```
+```ruby
 # Viewport screenshot (returns base64)
 screenshot()
 
@@ -206,7 +206,7 @@ pdf(format: "Letter", landscape: true)   # Custom format
 
 ### JavaScript Execution
 
-```
+```ruby
 # Get page dimensions
 evaluate(expression: "[window.innerWidth, window.innerHeight]")
 
@@ -219,7 +219,7 @@ evaluate(expression: "document.querySelectorAll('a').length")
 
 ### File Downloads
 
-```
+```ruby
 # Set download directory
 set_download_path(path: "/tmp/downloads")
 
@@ -268,7 +268,7 @@ The stealth module includes evasions ported from [puppeteer-extra](https://githu
 
 ### Runtime Control
 
-```
+```ruby
 # Check stealth status
 get_stealth_status(session: "default")
 
@@ -302,7 +302,7 @@ server:
 
 ## Project Structure
 
-```
+```text
 crucible/
 ├── exe/crucible                # CLI executable
 ├── crucible.gemspec            # Gem specification
