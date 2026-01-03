@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  echo "Usage: bin/release <version>"
+  echo "Example: bin/release 0.2.0"
+  exit 1
+fi
+
+VERSION=$1
+
+# Validate version format
+if ! [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "Error: Version must be in format X.Y.Z"
+  exit 1
+fi
+
+# Check for uncommitted changes
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  echo "Error: Working directory has uncommitted changes"
+  exit 1
+fi
+
+echo "Releasing version $VERSION..."
+
+# Update version.rb
+ruby -i -pe "gsub(/VERSION = '.*'/, \"VERSION = '$VERSION'\")" lib/crucible/version.rb
+echo "Updated lib/crucible/version.rb"
+
+# Commit
+git add lib/crucible/version.rb
+git commit -m "Bump version to $VERSION"
+echo "Committed changes"
+
+# Create and push tag
+git tag "v$VERSION"
+echo "Created tag v$VERSION"
+
+echo ""
+echo "Release prepared. To publish:"
+echo "  git push origin main --tags"
+echo "  gh release create v$VERSION --generate-notes"
