@@ -32,11 +32,23 @@ git add lib/crucible/version.rb
 git commit -m "Bump version to $VERSION"
 echo "Committed changes"
 
-# Create and push tag
+# Create tag
 git tag "v$VERSION"
 echo "Created tag v$VERSION"
 
+# Push to remote
+git push origin main --tags
+echo "Pushed to origin"
+
+# Create GitHub release
+gh release create "v$VERSION" --generate-notes
+echo "Created GitHub release"
+
+# Build gem
+gem build crucible.gemspec
+echo "Built gem"
+
+# Push to RubyGems (user handles MFA)
 echo ""
-echo "Release prepared. To publish:"
-echo "  git push origin main --tags"
-echo "  gh release create v$VERSION --generate-notes"
+echo "Pushing to RubyGems..."
+gem push crucible-"$VERSION".gem

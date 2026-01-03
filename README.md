@@ -22,13 +22,13 @@ bundle install
 
 ```bash
 # Run with defaults (headless, 1280x720 viewport, 30s timeout)
-./exe/crucible
+crucible
 
 # Run with visible browser
-./exe/crucible --no-headless
+crucible --no-headless
 
 # Full options
-./exe/crucible \
+crucible \
   --no-headless \
   --width 1920 \
   --height 1080 \
@@ -351,12 +351,9 @@ bundle exec rake server
 
 ```bash
 bin/release 0.2.0
-git push origin main --tags
-gh release create v0.2.0 --generate-notes
-gem push crucible-*.gem
 ```
 
-The release workflow builds the gem and attaches it to the GitHub release.
+This script bumps the version, commits, tags, pushes, creates a GitHub release, builds the gem, and pushes to RubyGems (you'll handle MFA via browser).
 
 ## Requirements
 
