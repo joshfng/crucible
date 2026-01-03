@@ -343,7 +343,7 @@ bundle exec rake server
 
 ## Requirements
 
-- Ruby >= 3.1.0
+- Ruby >= 3.2.0
 - Chrome or Chromium browser
 - Dependencies:
   - `ferrum` ~> 0.15
