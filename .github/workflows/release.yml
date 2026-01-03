@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,11 +20,7 @@ jobs:
       - name: Build gem
         run: gem build crucible.gemspec
 
-      - name: Publish to RubyGems
+      - name: Upload gem as release asset
         env:
-          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-        run: |
-          mkdir -p ~/.gem
-          echo -e "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}" > ~/.gem/credentials
-          chmod 0600 ~/.gem/credentials
-          gem push crucible-*.gem
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload ${{ github.event.release.tag_name }} crucible-*.gem

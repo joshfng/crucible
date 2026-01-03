@@ -347,11 +347,10 @@ bundle exec rake server
 bin/release 0.2.0
 git push origin main --tags
 gh release create v0.2.0 --generate-notes
+gem push crucible-*.gem
 ```
 
-The release workflow automatically publishes to RubyGems.
-
-**Setup**: Add `RUBYGEMS_API_KEY` to repository secrets.
+The release workflow builds the gem and attaches it to the GitHub release.
 
 ## Requirements
 
