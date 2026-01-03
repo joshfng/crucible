@@ -1,0 +1,7 @@
+#!/bin/bash
+# Wrapper script for Claude Desktop and other MCP clients
+# Uses mise to ensure correct Ruby environment
+
+cd "$(dirname "$0")/.." || exit
+
+exec /opt/homebrew/bin/mise exec -- ruby exe/crucible "$@"

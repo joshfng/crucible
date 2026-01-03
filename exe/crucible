@@ -1,0 +1,122 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Add lib to load path for development
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+
+require 'optparse'
+require 'crucible'
+
+options = {}
+config_file = nil
+
+parser = OptionParser.new do |opts|
+  opts.banner = 'Usage: crucible [options]'
+  opts.separator ''
+  opts.separator 'MCP server for browser automation using Ferrum/Chrome'
+  opts.separator ''
+  opts.separator 'Options:'
+
+  opts.on('-c', '--config FILE', 'Path to YAML configuration file') do |v|
+    config_file = v
+  end
+
+  opts.on('--[no-]headless', 'Run browser in headless mode (default: true)') do |v|
+    options[:headless] = v
+  end
+
+  opts.on('-w', '--width WIDTH', Integer, 'Viewport width in pixels (default: 1280)') do |v|
+    options[:viewport_width] = v
+  end
+
+  opts.on('-h', '--height HEIGHT', Integer, 'Viewport height in pixels (default: 720)') do |v|
+    options[:viewport_height] = v
+  end
+
+  opts.on('--chrome PATH', 'Path to Chrome/Chromium executable') do |v|
+    options[:chrome_path] = v
+  end
+
+  opts.on('-t', '--timeout SECONDS', Integer, 'Default timeout in seconds (default: 30)') do |v|
+    options[:timeout] = v
+  end
+
+  opts.on('--error-level LEVEL', %w[debug info warn error],
+          'Logging level: debug, info, warn, error (default: warn)') do |v|
+    options[:error_level] = v.to_sym
+  end
+
+  opts.on('--screenshot-format FORMAT', %w[png jpeg base64],
+          'Default screenshot format: png, jpeg, base64 (default: png)') do |v|
+    options[:screenshot_format] = v.to_sym
+  end
+
+  opts.on('--content-format FORMAT', %w[html text],
+          'Default content format: html, text (default: html)') do |v|
+    options[:content_format] = v.to_sym
+  end
+
+  opts.separator ''
+  opts.separator 'Stealth Options:'
+
+  opts.on('--[no-]stealth', 'Enable/disable stealth mode (default: enabled)') do |v|
+    options[:stealth_enabled] = v
+  end
+
+  opts.on('--stealth-profile PROFILE', %w[minimal moderate maximum],
+          'Stealth profile: minimal, moderate, maximum (default: moderate)') do |v|
+    options[:stealth_profile] = v.to_sym
+  end
+
+  opts.on('--stealth-locale LOCALE', 'Browser locale for stealth mode (default: en-US,en)') do |v|
+    options[:stealth_locale] = v
+  end
+
+  opts.separator ''
+
+  opts.on('-v', '--version', 'Show version') do
+    puts "crucible #{Crucible::VERSION}"
+    exit
+  end
+
+  opts.on('--help', 'Show this help message') do
+    puts opts
+    exit
+  end
+end
+
+begin
+  parser.parse!
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
+  warn "Error: #{e.message}"
+  warn "Run 'crucible --help' for usage information"
+  exit 1
+end
+
+# Handle extra arguments
+warn "Warning: Ignoring extra arguments: #{ARGV.join(' ')}" unless ARGV.empty?
+
+begin
+  # Load configuration
+  config = if config_file
+             Crucible::Configuration.from_file(config_file)
+           else
+             Crucible::Configuration.from_defaults
+           end
+
+  # Apply command-line overrides
+  options.each do |key, value|
+    config.public_send(:"#{key}=", value) if config.respond_to?(:"#{key}=")
+  end
+
+  # Apply default mode if configured
+  config.apply_mode(config.modes[:default]) if config.modes && config.modes[:default]
+
+  Crucible::Server.new(config).run
+rescue Crucible::Error => e
+  warn "Error: #{e.message}"
+  exit 1
+rescue Interrupt
+  # Clean exit on Ctrl+C
+  exit 0
+end

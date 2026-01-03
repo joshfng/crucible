@@ -1,0 +1,48 @@
+# Crucible Sample Configuration
+# Copy to ~/.config/crucible/config.yml or use with --config flag
+#
+# All settings are optional - defaults are shown below
+
+browser:
+  headless: true              # Run browser without visible window (true/false)
+  window_size: [1280, 720]    # Viewport dimensions [width, height] in pixels
+  timeout: 30                 # Default timeout for operations in seconds
+  # chrome_path: /usr/bin/chromium  # Custom path to Chrome/Chromium executable
+
+stealth:
+  enabled: true               # Enable stealth mode to evade bot detection (true/false)
+  profile: moderate           # Stealth profile: minimal, moderate, or maximum
+                              #   minimal  - Basic evasions (webdriver flag, window dimensions)
+                              #   moderate - Common evasions for most sites (default)
+                              #   maximum  - All evasions for strictest detection
+  locale: "en-US,en"          # Browser locale for Accept-Language header
+
+server:
+  log_level: warn             # Logging verbosity: debug, info, warn, or error
+  # logfile: /path/to/crucible.log  # Optional log file path
+
+# Operating modes - predefined configurations for different use cases
+# Switch modes at runtime with set_stealth_profile or via default mode
+modes:
+  default: ai_agent           # Mode to use on startup (optional)
+
+  ai_agent:                   # Optimized for AI agent browser control
+    stealth_profile: maximum  # Use maximum stealth for web automation
+    screenshot_format: png    # Screenshot format: png, jpeg, or base64
+    wait_timeout: 30000       # Default wait timeout in milliseconds
+
+  scraping:                   # Optimized for web scraping tasks
+    stealth_profile: maximum  # Maximum stealth to avoid detection
+    # rate_limit: 1000        # (future) Delay between requests in ms
+    # retry_attempts: 3       # (future) Number of retry attempts
+    # respect_robots_txt: true  # (future) Honor robots.txt rules
+
+  testing:                    # Optimized for automated testing
+    stealth_profile: minimal  # Minimal stealth for faster execution
+    # capture_network: true   # (future) Capture network requests
+    # performance_metrics: true  # (future) Collect performance data
+    # screenshot_on_failure: true  # (future) Auto-screenshot on errors
+
+  manual:                     # For interactive/debugging sessions
+    stealth_profile: moderate # Balanced stealth settings
+    # expose_cdp: true        # (future) Expose Chrome DevTools Protocol

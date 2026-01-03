@@ -1,0 +1,102 @@
+# RuboCop configuration for Crucible
+
+plugins:
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+
+# Gemspec - development dependencies in gemspec is acceptable
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+# Metrics - tool methods are inherently verbose due to MCP schema definitions
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - '*.gemspec'
+    - 'exe/*'
+    - 'lib/crucible/tools/**/*'
+  Max: 50
+
+Metrics/ClassLength:
+  Max: 200
+  Exclude:
+    - 'lib/crucible/tools/**/*'
+
+Metrics/ModuleLength:
+  Max: 200
+  Exclude:
+    - 'lib/crucible/tools/**/*'
+
+Metrics/MethodLength:
+  Max: 25
+  Exclude:
+    - 'lib/crucible/tools/**/*'
+
+Metrics/AbcSize:
+  Max: 35
+  Exclude:
+    - 'lib/crucible/tools/**/*'
+    - 'lib/crucible/configuration.rb'
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+  Exclude:
+    - 'lib/crucible/configuration.rb'
+    - 'lib/crucible/tools/**/*'
+
+Metrics/PerceivedComplexity:
+  Max: 15
+  Exclude:
+    - 'lib/crucible/configuration.rb'
+    - 'lib/crucible/tools/**/*'
+
+Metrics/ParameterLists:
+  Max: 8
+
+# Naming - these aren't predicate methods or accessor methods
+Naming/PredicateMethod:
+  Exclude:
+    - 'lib/crucible/configuration.rb'
+    - 'lib/crucible/session_manager.rb'
+
+Naming/AccessorMethodName:
+  Exclude:
+    - 'lib/crucible/tools/**/*'
+
+# Lint - duplicate rescue branches are intentional for different error types
+Lint/DuplicateBranch:
+  Exclude:
+    - 'lib/crucible/tools/**/*'
+
+# RSpec - tests need flexibility
+RSpec/MultipleExpectations:
+  Max: 10
+
+RSpec/ExampleLength:
+  Max: 70
+  Exclude:
+    - 'spec/e2e/**/*'
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/e2e/**/*'
+
+RSpec/BeforeAfterAll:
+  Exclude:
+    - 'spec/e2e/**/*'
