@@ -85,10 +85,9 @@ RSpec.describe 'Stealth E2E', :e2e do
         JS
 
         # Log results for debugging
-        puts "\nIntoli Test Results (with stealth):"
+
         results.each do |r|
-          status = r['passed'] ? 'PASS' : 'FAIL'
-          puts "  #{r['test']}: #{status} [#{r['bgColor']}] (#{r['result']})"
+          r['passed'] ? 'PASS' : 'FAIL'
         end
 
         # Key tests that should pass with stealth
@@ -131,14 +130,8 @@ RSpec.describe 'Stealth E2E', :e2e do
         # Check critical evasions directly
         webdriver = page.evaluate('navigator.webdriver')
         user_agent = page.evaluate('navigator.userAgent')
-        plugins_length = page.evaluate('navigator.plugins.length')
+        page.evaluate('navigator.plugins.length')
         languages = page.evaluate('navigator.languages')
-
-        puts "\nSannySoft Critical Checks (with stealth):"
-        puts "  navigator.webdriver: #{webdriver.inspect}"
-        puts "  User-Agent headless: #{user_agent.include?('Headless')}"
-        puts "  navigator.plugins.length: #{plugins_length}"
-        puts "  navigator.languages: #{languages.inspect}"
 
         # WebDriver should be false/undefined with stealth
         expect(webdriver).to be_falsey,
@@ -166,7 +159,7 @@ RSpec.describe 'Stealth E2E', :e2e do
         stealth_page.go_to('about:blank')
         sleep 1
         stealth_webdriver = stealth_page.evaluate('navigator.webdriver')
-        stealth_ua = stealth_page.evaluate('navigator.userAgent')
+        stealth_page.evaluate('navigator.userAgent')
       ensure
         stealth_manager.close_all
       end
@@ -177,15 +170,11 @@ RSpec.describe 'Stealth E2E', :e2e do
         vanilla_page = vanilla_manager.page('vanilla')
         vanilla_page.go_to('about:blank')
         sleep 1
-        vanilla_webdriver = vanilla_page.evaluate('navigator.webdriver')
-        vanilla_ua = vanilla_page.evaluate('navigator.userAgent')
+        vanilla_page.evaluate('navigator.webdriver')
+        vanilla_page.evaluate('navigator.userAgent')
       ensure
         vanilla_manager.close_all
       end
-
-      puts "\nStealth vs Vanilla Comparison:"
-      puts "  Stealth - webdriver: #{stealth_webdriver.inspect}, headless in UA: #{stealth_ua.include?('Headless')}"
-      puts "  Vanilla - webdriver: #{vanilla_webdriver.inspect}, headless in UA: #{vanilla_ua.include?('Headless')}"
 
       # With stealth, webdriver should be false/undefined
       expect(stealth_webdriver).to be_falsey
@@ -207,10 +196,6 @@ RSpec.describe 'Stealth E2E', :e2e do
         # Test window dimensions (should be set even in headless)
         outer_width = page.evaluate('window.outerWidth')
         outer_height = page.evaluate('window.outerHeight')
-
-        puts "\nWindow Dimensions:"
-        puts "  outerWidth: #{outer_width}"
-        puts "  outerHeight: #{outer_height}"
 
         expect(outer_width).to be > 0, 'window.outerWidth should be set'
         expect(outer_height).to be > 0, 'window.outerHeight should be set'
