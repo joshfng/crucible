@@ -360,8 +360,8 @@ This script bumps the version, commits, tags, pushes, creates a GitHub release, 
 - Ruby >= 3.2.0
 - Chrome or Chromium browser
 - Dependencies:
-  - `ferrum` ~> 0.15
-  - `mcp` ~> 0.4
+  - `ferrum` ~> 0.17.1
+  - `mcp` ~> 0.4.0
 
 ## License
 

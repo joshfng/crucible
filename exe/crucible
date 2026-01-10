@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Add lib to load path for development
-$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+require 'bundler/setup'
 
 require 'optparse'
 require 'crucible'
