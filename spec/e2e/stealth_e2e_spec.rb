@@ -87,7 +87,7 @@ RSpec.describe 'Stealth E2E', :e2e do
         # Log results for debugging
 
         results.each do |r|
-          r['passed'] ? 'PASS' : 'FAIL'
+          r['passed'] ? 'PASS' : 'FAIL' # rubocop:disable Lint/Void
         end
 
         # Key tests that should pass with stealth
