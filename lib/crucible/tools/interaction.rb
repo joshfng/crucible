@@ -280,8 +280,7 @@ module Crucible
                   description: 'Scroll direction shortcut',
                   enum: %w[up down left right top bottom]
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', selector: nil, x: 0, y: 0, direction: nil, **|
             page = sessions.page(session)

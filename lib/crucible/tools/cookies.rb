@@ -34,8 +34,7 @@ module Crucible
                   type: 'string',
                   description: 'Specific cookie name to get (optional, returns all if not specified)'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', name: nil, **|
             page = sessions.page(session)
@@ -181,8 +180,7 @@ module Crucible
                   type: 'string',
                   description: 'Specific cookie name to clear (optional, clears all if not specified)'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', name: nil, **|
             page = sessions.page(session)

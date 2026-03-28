@@ -124,8 +124,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             # Use our tracker instead of Ferrum's (which gets cleared on navigation)
@@ -171,8 +170,7 @@ module Crucible
                   description: 'Maximum time to wait in seconds',
                   default: 30
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', timeout: 30, **|
             browser = sessions.get_or_create(session)
@@ -240,8 +238,7 @@ module Crucible
                   description: 'Also delete the actual files from disk',
                   default: false
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', delete_files: false, **|
             files = tracker.clear_files(session)

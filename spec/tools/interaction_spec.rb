@@ -37,10 +37,10 @@ RSpec.describe Crucible::Tools::Interaction do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:selector)
-      expect(schema.properties).to have_key(:button)
-      expect(schema.properties).to have_key(:count)
-      expect(schema.required).to include(:selector)
+      expect(schema.to_h[:properties]).to have_key(:selector)
+      expect(schema.to_h[:properties]).to have_key(:button)
+      expect(schema.to_h[:properties]).to have_key(:count)
+      expect(schema.to_h[:required]).to include('selector')
     end
 
     it 'clicks element successfully' do
@@ -77,11 +77,11 @@ RSpec.describe Crucible::Tools::Interaction do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:selector)
-      expect(schema.properties).to have_key(:text)
-      expect(schema.properties).to have_key(:clear)
-      expect(schema.properties).to have_key(:submit)
-      expect(schema.required).to include(:selector, :text)
+      expect(schema.to_h[:properties]).to have_key(:selector)
+      expect(schema.to_h[:properties]).to have_key(:text)
+      expect(schema.to_h[:properties]).to have_key(:clear)
+      expect(schema.to_h[:properties]).to have_key(:submit)
+      expect(schema.to_h[:required]).to include('selector', 'text')
     end
 
     it 'types text into element' do
@@ -122,8 +122,8 @@ RSpec.describe Crucible::Tools::Interaction do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:fields)
-      expect(schema.required).to include(:fields)
+      expect(schema.to_h[:properties]).to have_key(:fields)
+      expect(schema.to_h[:required]).to include('fields')
     end
 
     it 'fills multiple fields' do

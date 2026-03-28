@@ -60,8 +60,7 @@ module Crucible
                   type: 'string',
                   description: 'File path to save screenshot (if omitted, returns base64 data)'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', selector: nil, full_page: false, format: nil, quality: 80, path: nil, **|
             format = (format || config.screenshot_format.to_s).to_sym
@@ -133,8 +132,7 @@ module Crucible
                   enum: %w[html text],
                   default: 'html'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', selector: nil, format: nil, **|
             format ||= config.content_format.to_s
@@ -204,8 +202,7 @@ module Crucible
                   type: 'string',
                   description: 'File path to save PDF (if omitted, returns base64 data)'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', landscape: false, format: 'A4', scale: 1.0, print_background: true, path: nil, **|
             page = sessions.page(session)
@@ -294,8 +291,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             page = sessions.page(session)
@@ -318,8 +314,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             page = sessions.page(session)

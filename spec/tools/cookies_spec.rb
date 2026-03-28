@@ -38,8 +38,8 @@ RSpec.describe Crucible::Tools::Cookies do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:session)
-      expect(schema.properties).to have_key(:name)
+      expect(schema.to_h[:properties]).to have_key(:session)
+      expect(schema.to_h[:properties]).to have_key(:name)
     end
 
     it 'returns all cookies' do
@@ -95,8 +95,8 @@ RSpec.describe Crucible::Tools::Cookies do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:cookies)
-      expect(schema.required).to include(:cookies)
+      expect(schema.to_h[:properties]).to have_key(:cookies)
+      expect(schema.to_h[:required]).to include('cookies')
     end
 
     it 'sets a cookie' do

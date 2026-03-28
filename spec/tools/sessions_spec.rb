@@ -53,8 +53,8 @@ RSpec.describe Crucible::Tools::Sessions do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:session)
-      expect(schema.properties).to have_key(:all)
+      expect(schema.to_h[:properties]).to have_key(:session)
+      expect(schema.to_h[:properties]).to have_key(:all)
     end
 
     it 'closes specific session' do

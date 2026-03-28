@@ -36,14 +36,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   # Runtime dependencies
-  spec.add_dependency 'ferrum', '~> 0.17.1'
-  spec.add_dependency 'mcp', '~> 0.4.0'
+  spec.add_dependency 'ferrum', '~> 0.17'
+  spec.add_dependency 'mcp', '~> 0.9'
 
   # Development dependencies
-  spec.add_development_dependency 'rake', '~> 13.3'
-  spec.add_development_dependency 'rspec', '~> 3.13'
-  spec.add_development_dependency 'rubocop', '~> 1.82'
-  spec.add_development_dependency 'rubocop-rake', '~> 0.7.1'
-  spec.add_development_dependency 'rubocop-rspec', '~> 3.9'
-  spec.add_development_dependency 'simplecov', '~> 0.22.0'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-rake'
+  spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'simplecov'
 end

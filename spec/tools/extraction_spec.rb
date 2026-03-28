@@ -37,10 +37,10 @@ RSpec.describe Crucible::Tools::Extraction do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:selector)
-      expect(schema.properties).to have_key(:full_page)
-      expect(schema.properties).to have_key(:format)
-      expect(schema.properties).to have_key(:quality)
+      expect(schema.to_h[:properties]).to have_key(:selector)
+      expect(schema.to_h[:properties]).to have_key(:full_page)
+      expect(schema.to_h[:properties]).to have_key(:format)
+      expect(schema.to_h[:properties]).to have_key(:quality)
     end
 
     it 'takes viewport screenshot' do
@@ -76,8 +76,8 @@ RSpec.describe Crucible::Tools::Extraction do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:selector)
-      expect(schema.properties).to have_key(:format)
+      expect(schema.to_h[:properties]).to have_key(:selector)
+      expect(schema.to_h[:properties]).to have_key(:format)
     end
 
     it 'gets full page HTML' do
@@ -113,9 +113,9 @@ RSpec.describe Crucible::Tools::Extraction do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:landscape)
-      expect(schema.properties).to have_key(:format)
-      expect(schema.properties).to have_key(:scale)
+      expect(schema.to_h[:properties]).to have_key(:landscape)
+      expect(schema.to_h[:properties]).to have_key(:format)
+      expect(schema.to_h[:properties]).to have_key(:scale)
     end
 
     it 'generates PDF' do
@@ -141,8 +141,8 @@ RSpec.describe Crucible::Tools::Extraction do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:expression)
-      expect(schema.required).to include(:expression)
+      expect(schema.to_h[:properties]).to have_key(:expression)
+      expect(schema.to_h[:required]).to include('expression')
     end
 
     it 'evaluates JavaScript expression' do

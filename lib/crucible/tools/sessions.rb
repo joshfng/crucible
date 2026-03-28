@@ -23,8 +23,7 @@ module Crucible
             description: 'List all active browser sessions',
             input_schema: {
               type: 'object',
-              properties: {},
-              required: []
+              properties: {}
             }
           ) do |**|
             session_list = sessions.list
@@ -57,8 +56,7 @@ module Crucible
                   description: 'Close all sessions',
                   default: false
                 }
-              },
-              required: []
+              }
             }
           ) do |session: nil, all: false, **|
             if all

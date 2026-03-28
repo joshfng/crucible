@@ -113,8 +113,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             page = sessions.page(session)
@@ -138,8 +137,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             page = sessions.page(session)
@@ -163,8 +161,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             page = sessions.page(session)

@@ -37,8 +37,8 @@ RSpec.describe Crucible::Tools::Navigation do
     it 'has correct schema' do
       schema = tool.input_schema_value
       expect(schema.to_h[:type]).to eq('object')
-      expect(schema.properties).to have_key(:url)
-      expect(schema.required).to include(:url)
+      expect(schema.to_h[:properties]).to have_key(:url)
+      expect(schema.to_h[:required]).to include('url')
     end
 
     it 'navigates to url successfully' do
@@ -74,9 +74,9 @@ RSpec.describe Crucible::Tools::Navigation do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:selector)
-      expect(schema.properties).to have_key(:timeout)
-      expect(schema.required).to include(:selector)
+      expect(schema.to_h[:properties]).to have_key(:selector)
+      expect(schema.to_h[:properties]).to have_key(:timeout)
+      expect(schema.to_h[:required]).to include('selector')
     end
 
     it 'waits for element successfully' do

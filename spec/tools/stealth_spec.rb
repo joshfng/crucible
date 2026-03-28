@@ -31,8 +31,8 @@ RSpec.describe Crucible::Tools::Stealth do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:session)
-      expect(schema.properties).to have_key(:profile)
+      expect(schema.to_h[:properties]).to have_key(:session)
+      expect(schema.to_h[:properties]).to have_key(:profile)
     end
 
     it 'enables stealth with default session' do
@@ -81,7 +81,7 @@ RSpec.describe Crucible::Tools::Stealth do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:session)
+      expect(schema.to_h[:properties]).to have_key(:session)
     end
 
     it 'disables stealth with default session' do
@@ -116,7 +116,7 @@ RSpec.describe Crucible::Tools::Stealth do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:session)
+      expect(schema.to_h[:properties]).to have_key(:session)
     end
 
     it 'returns stealth status' do
@@ -160,9 +160,9 @@ RSpec.describe Crucible::Tools::Stealth do
 
     it 'has correct schema' do
       schema = tool.input_schema_value
-      expect(schema.properties).to have_key(:session)
-      expect(schema.properties).to have_key(:profile)
-      expect(schema.required).to include(:profile)
+      expect(schema.to_h[:properties]).to have_key(:session)
+      expect(schema.to_h[:properties]).to have_key(:profile)
+      expect(schema.to_h[:required]).to include('profile')
     end
 
     it 'sets stealth profile' do

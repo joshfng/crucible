@@ -43,8 +43,7 @@ module Crucible
                   description: 'Stealth profile: minimal (basic evasions), moderate (common evasions), ' \
                                'or maximum (all evasions for strictest detection)'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', profile: nil, **|
             profile_sym = profile&.to_sym
@@ -73,8 +72,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             sessions.disable_stealth(session)
@@ -101,8 +99,7 @@ module Crucible
                   description: 'Session name',
                   default: 'default'
                 }
-              },
-              required: []
+              }
             }
           ) do |session: 'default', **|
             info = sessions.stealth_info(session)
