@@ -17,7 +17,7 @@ module Crucible
   #
   class SessionManager
     # Session metadata
-    SessionInfo = Struct.new(:browser, :stealth, :stealth_enabled, keyword_init: true)
+    SessionInfo = Struct.new(:browser, :stealth, :stealth_enabled)
 
     # @param config [Configuration] the server configuration
     def initialize(config)
