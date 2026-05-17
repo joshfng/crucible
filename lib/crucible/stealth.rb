@@ -203,7 +203,6 @@ module Crucible
 
       # Substitute options in the script
       # Scripts end with `})({ key: null }); // Will be replaced by Ruby`
-      # rubocop:disable Style/RegexpLiteral
       script.gsub(/\}\)\(\{[^}]+\}\);?\s*(\/\/.*)?$/) do
         # rubocop:enable Style/RegexpLiteral
         "})(#{merged_opts.to_json});"
